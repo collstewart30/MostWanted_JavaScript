@@ -35,7 +35,7 @@ function app(people) {
             break;
         default:
             // Re-initializes the app() if neither case was hit above. This is an instance of recursion.
-            app(people);
+            app(people);    // calling app you're in
             break;
     }
     // Calls the mainMenu() only AFTER we find the SINGLE PERSON
@@ -72,7 +72,7 @@ function mainMenu(person, people) {
         case "family":
             //! TODO #2: Declare a findPersonFamily function //////////////////////////////////////////
             // HINT: Look for a people-collection stringifier utility function to help      spouse, siblings, parents - function for each
-            let personFamily = findPersonFamily(person[0], people);
+            let personFamily = findPersonSpouse(person[0], people);
             alert(personFamily);
             break;
         case "descendants":
@@ -123,7 +123,7 @@ function searchByName(people) {
  */
 function displayPeople(people) {
     alert(
-        people
+        data
             .map(function (person) {
                 return `${person.firstName} ${person.lastName}`;
             })
@@ -208,3 +208,30 @@ function chars(input) {
 //     "parents": [693243224, 888201200],
 //     "currentSpouse": 313997561
 // },
+
+
+function findPersonSpouse(person, people){
+    if (person.currentSpouse == null) {
+        return `${person.firstName} ${person.lastName} does not have a spouse.`
+    }
+    if (person.currentSpouse !== null) {
+        // function displaySpouse(people) {
+        //     alert(
+        //         data
+        //             .map(function (person) {
+        //                 return `${person.currentSpouse[firstName]} ${person.currentSpouse[lastName]}`;
+        //             })
+        //     );
+        // }
+        return `${person.firstName} ${person.lastName}'s current spouse is ${person.currentSpouse}` // how to show name instead of id
+    }
+}
+
+function findPersonParents(person, people){
+    if (person.parents == null) {
+        return `${person.firstName} ${person.lastName} does not have parents.`
+    }
+    if (person.parents !== null) {
+        displayPeople(person)
+    }
+}

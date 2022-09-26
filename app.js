@@ -71,7 +71,7 @@ function mainMenu(person, people) {
             break;
         case "family":
             //! TODO #2: Declare a findPersonFamily function //////////////////////////////////////////
-            // HINT: Look for a people-collection stringifier utility function to help
+            // HINT: Look for a people-collection stringifier utility function to help      spouse, siblings, parents - function for each
             let personFamily = findPersonFamily(person[0], people);
             alert(personFamily);
             break;
@@ -102,7 +102,7 @@ function mainMenu(person, people) {
  * @returns {Array}             An array containing the person-object (or empty array if no match)
  */
 function searchByName(people) {
-    let firstName = promptFor("What is the person's first name?", chars);
+    let firstName = promptFor("What is the person's first name?", chars);   // update chars - default value, always returns true. need to fix to validate input
     let lastName = promptFor("What is the person's last name?", chars);
 
     // The foundPerson value will be of type Array. Recall that .filter() ALWAYS returns an array.
@@ -141,6 +141,15 @@ function displayPerson(person) {
     let personInfo = `First Name: ${person.firstName}\n`;
     personInfo += `Last Name: ${person.lastName}\n`;
     //! TODO #1a: finish getting the rest of the information to display //////////////////////////////////////////
+    personInfo += `Gender: ${person.gender}\n`;
+    personInfo += `Date of Birth: ${person.dob}\n`;
+    personInfo += `Height: ${person.height}\n`;
+    personInfo += `Weight: ${person.weight}\n`;
+    personInfo += `Eye Color: ${person.eyeColor}\n`;
+    personInfo += `Occupation: ${person.occupation}\n`;
+    // personInfo += `Parents: ${person.parents[]}\n`;      // find out how to display array
+    // personInfo += `Spouse: ${person.currentSpouse}\n`;   // find out how to display id linked to another person
+
     alert(personInfo);
 }
 // End of displayPerson()
@@ -155,9 +164,9 @@ function displayPerson(person) {
  */
 function promptFor(question, valid) {
     do {
-        var response = prompt(question).trim();
-    } while (!response || !valid(response));
-    return response;
+        var response = prompt(question).trim();     // trims off white space left and right ex "   yes " is just "yes"
+    } while (!response || !valid(response));        // !response -> "if there is no response", !valid -> "if there is no valid response"
+    return response;    // keep doing var response if no valid response or no response. this is validating bad input - keeps you in function until gets good input
 }
 // End of promptFor()
 
@@ -167,7 +176,7 @@ function promptFor(question, valid) {
  * @returns {Boolean}           The result of our condition evaluation.
  */
 function yesNo(input) {
-    return input.toLowerCase() === "yes" || input.toLowerCase() === "no";
+    return input.toLowerCase() === "yes" || input.toLowerCase() === "no";   // toLowerCase - makes lower case ex "YeS" becomes "yes"
 }
 // End of yesNo()
 
@@ -184,3 +193,18 @@ function chars(input) {
 
 //////////////////////////////////////////* End Of Starter Code *//////////////////////////////////////////
 // Any additional functions can be written below this line 👇. Happy Coding! 😁
+
+// EXAMPLE OF PERSON
+// {
+//     "id": 313207561,
+//     "firstName": "Mattias",
+//     "lastName": "Madden",
+//     "gender": "male",
+//     "dob": "2/19/1966",
+//     "height": 70,
+//     "weight": 110,
+//     "eyeColor": "blue",
+//     "occupation": "assistant",
+//     "parents": [693243224, 888201200],
+//     "currentSpouse": 313997561
+// },

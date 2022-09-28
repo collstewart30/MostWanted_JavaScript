@@ -255,6 +255,11 @@ if (personSpouse != null) {
         newArray += `Spouse: ${personSpouse[i].firstName} ${personSpouse[i].lastName}\n`
     }
 }
+if (personParents != null) {
+    for(let i = 0; i < personParents.length; i++) {
+        newArray += `Parent: ${personParents[i].firstName} ${personParents[i].lastName}\n`
+    }
+}
 if (personSiblings != null) {
     for(let i = 0; i < personSiblings.length; i++) {
         newArray += `Sibling: ${personSiblings[i].firstName} ${personSiblings[i].lastName}\n`

@@ -211,24 +211,55 @@ function chars(input) {
 
 
 function findPersonSpouse(person, people){
-    if (person.currentSpouse == null) {
-        return `${person.firstName} ${person.lastName} does not have a spouse.`
-    }
-    if (person.currentSpouse !== null) {
-        // function displaySpouse(people) {
-        //     alert(
-        //         data
-        //             .map(function (person) {
-        //                 return `${person.currentSpouse[firstName]} ${person.currentSpouse[lastName]}`;
-        //             })
-        //     );
-        // }
-        return `${person.firstName} ${person.lastName}'s current spouse is ${person.currentSpouse}` // how to show name instead of id
-    }
+    let newArray = people.filter(function(el) {
+     if(el.id == person.currentSpouse) {
+        return true;
+     }
+    })
+    return newArray;
 }
 
+
 function findPersonParents(person, people){
-    if (person.parents.length === 0) {
-        return `${person.firstName} ${person.lastName} does not have parents listed.`
+    let newArray = people.filter(function(el){
+        if((person.parents).includes(el.id)) {
+            return true;
+        }
+    })
+    return newArray;
+}
+
+function findPersonSiblings(person, people){
+    let newArray = people.filter(function(el){
+        if (person.id == el.id) {
+            return false;
+        }
+        if(person.parents.includes(el.parents[0]) || person.parents.includes(el.parents[1])) {
+            return true;
+        }
+    })
+    return newArray;
+}
+
+
+// using helper functions
+function findPersonFamily(person, people){
+    let newArray = [];
+    let personSpouse = findPersonSpouse(person, people);
+    let personParents = findPersonParents(person,people);
+    let personSiblings = findPersonSiblings(person,people);
+
+if (personSpouse != null) {
+    // for loop is starting point ;go until this changes; how you get there
+    for(let i = 0; i < personSpouse.length; i++) {
+        newArray += `Spouse: ${personSpouse[i].firstName} ${personSpouse[i].lastName}\n`
     }
+}
+if (personSiblings != null) {
+    for(let i = 0; i < personSiblings.length; i++) {
+        newArray += `Sibling: ${personSiblings[i].firstName} ${personSiblings[i].lastName}\n`
+    }
+}
+return newArray;
+
 }

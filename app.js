@@ -67,12 +67,11 @@ function mainMenu(person, people) {
             //! TODO #1: Utilize the displayPerson function //////////////////////////////////////////
             // HINT: Look for a person-object stringifier utility function to help
             let personInfo = displayPerson(person[0]);
-            alert(personInfo);
             break;
         case "family":
             //! TODO #2: Declare a findPersonFamily function //////////////////////////////////////////
             // HINT: Look for a people-collection stringifier utility function to help      spouse, siblings, parents - function for each
-            let personFamily = findPersonSpouse(person[0], people);
+            let personFamily = findPersonParents(person[0], people);        // CHANGE THIS BACK TO ORIGINAL
             alert(personFamily);
             break;
         case "descendants":
@@ -102,7 +101,7 @@ function mainMenu(person, people) {
  * @returns {Array}             An array containing the person-object (or empty array if no match)
  */
 function searchByName(people) {
-    let firstName = promptFor("What is the person's first name?", chars);   // update chars - default value, always returns true. need to fix to validate input
+    let firstName = promptFor("What is the person's first name?", chars);   // UPDATE chars - default value, always returns true. need to fix to validate input
     let lastName = promptFor("What is the person's last name?", chars);
 
     // The foundPerson value will be of type Array. Recall that .filter() ALWAYS returns an array.
@@ -128,7 +127,7 @@ function displayPeople(people) {
                 return `${person.firstName} ${person.lastName}`;
             })
             .join("\n")
-    );
+    ); 
 }
 // End of displayPeople()
 
@@ -147,9 +146,6 @@ function displayPerson(person) {
     personInfo += `Weight: ${person.weight}\n`;
     personInfo += `Eye Color: ${person.eyeColor}\n`;
     personInfo += `Occupation: ${person.occupation}\n`;
-    // personInfo += `Parents: ${person.parents[]}\n`;      // find out how to display array
-    // personInfo += `Spouse: ${person.currentSpouse}\n`;   // find out how to display id linked to another person
-
     alert(personInfo);
 }
 // End of displayPerson()
@@ -228,10 +224,7 @@ function findPersonSpouse(person, people){
 }
 
 function findPersonParents(person, people){
-    if (person.parents == null) {
-        return `${person.firstName} ${person.lastName} does not have parents.`
-    }
-    if (person.parents !== null) {
-        displayPeople(person)
+    if (person.parents.length === 0) {
+        return `${person.firstName} ${person.lastName} does not have parents listed.`
     }
 }

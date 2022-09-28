@@ -59,19 +59,19 @@ function mainMenu(person, people) {
         return app(people);
     }
     let displayOption = prompt(
-        `Found ${person[0].firstName} ${person[0].lastName}. Do you want to know their 'info', 'family', or 'descendants'?\nType the option you want or type 'restart' or 'quit'.`
+        `Found ${person[0].firstName} ${person[0].lastName}. Do you want to know their 'info', 'family', or 'descendants', or 'test'?\nType the option you want or type 'restart' or 'quit'.`
     );
     // Routes our application based on the user's input
     switch (displayOption) {
         case "info":
             //! TODO #1: Utilize the displayPerson function //////////////////////////////////////////
-            // HINT: Look for a person-object stringifier utility function to help
+            // HINT: Look for a person-object stringifier utility function to help                          DONE
             let personInfo = displayPerson(person[0]);
             break;
         case "family":
             //! TODO #2: Declare a findPersonFamily function //////////////////////////////////////////
             // HINT: Look for a people-collection stringifier utility function to help      spouse, siblings, parents - function for each
-            let personFamily = findPersonParents(person[0], people);        // CHANGE THIS BACK TO ORIGINAL
+            let personFamily = findPersonFamily(person[0], people);        
             alert(personFamily);
             break;
         case "descendants":
@@ -87,6 +87,10 @@ function mainMenu(person, people) {
         case "quit":
             // Stop application execution
             return;
+        case "test":
+            let personParents = findPersonParents(person[0], people);
+            alert(personParents);            
+            break;
         default:
             // Prompt user again. Another instance of recursion
             return mainMenu(person, people);
@@ -139,7 +143,7 @@ function displayPeople(people) {
 function displayPerson(person) {
     let personInfo = `First Name: ${person.firstName}\n`;
     personInfo += `Last Name: ${person.lastName}\n`;
-    //! TODO #1a: finish getting the rest of the information to display //////////////////////////////////////////
+    //! TODO #1a: finish getting the rest of the information to display //////////////////////////////////////////  DONE
     personInfo += `Gender: ${person.gender}\n`;
     personInfo += `Date of Birth: ${person.dob}\n`;
     personInfo += `Height: ${person.height}\n`;

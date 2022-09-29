@@ -309,3 +309,12 @@ function findPersonDescendants(person, people){
 //             //! TODO #4a: Provide option to search for single or multiple //////////////////////////////////////////
 //         searchResults = searchByTraits(people);
 //         break;
+
+
+function searchByTraits(people){
+    let userInputTrait = prompt("Please enter a trait to search by:")    // add a switch case
+    let userInputVal = prompt("Please enter a trait specification: ")   // add a swtich case
+    let foundPerson = people.filter(function(person){
+        if(person.)
+    })
+}

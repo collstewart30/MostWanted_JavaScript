@@ -268,3 +268,44 @@ if (personSiblings != null) {
 return newArray;
 
 }
+
+
+function findPersonDescendants(person, people){
+    let newArray = people.filter(function(el){
+        if (person.id == el.id) {
+            return false;
+        }
+        if(person.parents.includes(el.parents[0]) || person.parents.includes(el.parents[1])) {
+            return true;
+        }       
+        
+        let newArray = person.parents;
+        array = [person];
+        
+        if(newArray.length === 0){
+            return array;
+        }
+        for (let index = 0; index < newArray.length; index++) {
+            array = array.concat(
+                findPersonDescendants(newArray[i])
+                );
+            }
+        })
+    return newArray;
+}
+
+
+
+
+// let searchType = promptFor(
+//     "Do you know the name of the person you are looking for? Enter 'yes' or 'no'",
+//     yesNo
+// ).toLowerCase();
+// let searchResults;
+// // Routes our application based on the user's input
+// switch (searchType) {
+//     case "no":
+//         //! TODO #4: Declare a searchByTraits (multiple traits) function //////////////////////////////////////////
+//             //! TODO #4a: Provide option to search for single or multiple //////////////////////////////////////////
+//         searchResults = searchByTraits(people);
+//         break;

@@ -270,30 +270,46 @@ return newArray;
 }
 
 
-function findPersonDescendants(person, people){
-    let newArray = people.filter(function(el){
-        if (person.id == el.id) {
-            return false;
-        }
-        if(person.parents.includes(el.parents[0]) || person.parents.includes(el.parents[1])) {
-            return true;
-        }       
+function findPersonDescendants(person, people = []){
+    let results = people.filter(el => el.parents.includes(person.id));  // results will be an array
+    // base case - have we reached the end of a branch (leaf)
+    if (results.length === 0) return results;
+
+    // recursive case - calling function (might consider using in for-loop)
+    for (let index = 0; index < results.length; index++) {
+        results = results.concat(
+            findPersonDescendants(results[i])   // recursive function, person to pass in
+        )  
+        ;        
+    }
+
+    
+    // let newArray = people.filter(function(el){
+    //     if (person.id == el.id) {
+    //         return false;
+    //     }
+    //     if(person.parents.includes(el.parents[0]) || person.parents.includes(el.parents[1])) {
+    //         return true;
+    //     }       
         
-        let newArray = person.parents;
-        array = [person];
+    //     let newArray = person.parents;
+    //     array = [person];
         
-        if(newArray.length === 0){
-            return array;
-        }
-        for (let index = 0; index < newArray.length; index++) {
-            array = array.concat(
-                findPersonDescendants(newArray[i])
-                );
-            }
-        })
-    return newArray;
+    //     if(newArray.length === 0){
+    //         return array;
+    //     }
+    //     for (let index = 0; index < newArray.length; index++) {
+    //         array = array.concat(
+    //             findPersonDescendants(newArray[i])
+    //             );
+    //         }
+    //     })
+    // return newArray;
+
+    return results;
 }
 
+displayPeople(findPersonDescendants(person,people))
 
 
 
@@ -311,10 +327,30 @@ function findPersonDescendants(person, people){
 //         break;
 
 
-function searchByTraits(people){
+function searchByTraitsFunction(array){
     let userInputTrait = prompt("Please enter a trait to search by:")    // add a switch case
     let userInputVal = prompt("Please enter a trait specification: ")   // add a swtich case
-    let foundPerson = people.filter(function(person){
-        if(person.)
-    })
+    let foundPerson = array.filter(function(element){
+        try {
+            if(element[userInputTrait].includes(userInputVal)){
+                return true;
+            }
+        } catch (error){
+            alert("Error. Please try again.")
+            return mainMenu(person, people);
+        }
+        finally{
+            if(element[userInputTrait]===parseInt(userInputVal)){
+                return true;
+            }
+        }
+    });
+    return foundPerson;
 }
+
+function searchByTraits(people){
+    let searchByTraitsResult = searchByTraitsFunction(people)
+
+}
+
+// search .includes() "eyeColor"

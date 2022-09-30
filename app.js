@@ -60,7 +60,7 @@ function mainMenu(person, people) {
         return app(people);
     }
     let displayOption = prompt(
-        `Found ${person[0].firstName} ${person[0].lastName}. Do you want to know their 'info', 'family', or 'descendants', or 'test'?\nType the option you want or type 'restart' or 'quit'.`
+        `Found ${person[0].firstName} ${person[0].lastName}. Do you want to know their 'info', 'family', or 'descendants'?\nType the option you want or type 'restart' or 'quit'.`
     );
     // Routes our application based on the user's input
     switch (displayOption) {
@@ -102,7 +102,7 @@ function mainMenu(person, people) {
  * @returns {Array}             An array containing the person-object (or empty array if no match)
  */
 function searchByName(people) {
-    let firstName = promptFor("What is the person's first name?", chars);   // UPDATE chars - default value, always returns true. need to fix to validate input
+    let firstName = promptFor("What is the person's first name?", chars);
     let lastName = promptFor("What is the person's last name?", chars);
 
     // The foundPerson value will be of type Array. Recall that .filter() ALWAYS returns an array.
@@ -246,23 +246,23 @@ function findPersonFamily(person, people){
     let personParents = findPersonParents(person,people);
     let personSiblings = findPersonSiblings(person,people);
 
-if (personSpouse != null) {
-    // for loop is starting point ;go until this changes; how you get there
-    for(let i = 0; i < personSpouse.length; i++) {
-        newArray += `Spouse: ${personSpouse[i].firstName} ${personSpouse[i].lastName}\n`
+    if (personSpouse != null) {
+        // for loop is starting point ;go until this changes; how you get there
+        for(let i = 0; i < personSpouse.length; i++) {
+            newArray += `Spouse: ${personSpouse[i].firstName} ${personSpouse[i].lastName}\n`
+        }
     }
-}
-if (personParents != null) {
-    for(let i = 0; i < personParents.length; i++) {
-        newArray += `Parent: ${personParents[i].firstName} ${personParents[i].lastName}\n`
+    if (personParents != null) {
+        for(let i = 0; i < personParents.length; i++) {
+            newArray += `Parent: ${personParents[i].firstName} ${personParents[i].lastName}\n`
+        }
     }
-}
-if (personSiblings != null) {
-    for(let i = 0; i < personSiblings.length; i++) {
-        newArray += `Sibling: ${personSiblings[i].firstName} ${personSiblings[i].lastName}\n`
+    if (personSiblings != null) {
+        for(let i = 0; i < personSiblings.length; i++) {
+            newArray += `Sibling: ${personSiblings[i].firstName} ${personSiblings[i].lastName}\n`
+        }
     }
-}
-return newArray;
+    return newArray;
 }
 
 
@@ -281,45 +281,66 @@ function findPersonDescendants(person, people = []){
 }
 
 
-
-// let searchType = promptFor(
-//     "Do you know the name of the person you are looking for? Enter 'yes' or 'no'",
-//     yesNo
-// ).toLowerCase();
-// let searchResults;
-// // Routes our application based on the user's input
-// switch (searchType) {
-//     case "no":
-//         //! TODO #4: Declare a searchByTraits (multiple traits) function //////////////////////////////////////////
-//             //! TODO #4a: Provide option to search for single or multiple //////////////////////////////////////////
-//         searchResults = searchByTraits(people);
-//         break;
-
-
-function searchByTraitsFunction(array){
-    let userInputTrait = prompt("Please enter a trait to search by:")    // add a switch case
-    let userInputVal = prompt("Please enter a trait specification: ")   // add a swtich case
-    let foundPerson = array.filter(function(el){
-        try {
-            if(el[userInputTrait].includes(userInputVal)){
-                return true;
-            }
-        } catch (error){
-            alert("I did not find that value. Please try again.")
-            return mainMenu(person, people);
-        }
-        finally{
-            if(el[userInputTrait]===parseInt(userInputVal)){
-                return true;
-            }
-        }
-    });
-    return displayPeople(foundPerson);
-}
+// function searchByTraitsFunction(array){    
+//     alert("Trait search options are: \ngender\ndob\nheight\nweight\neyeColor\noccupation")
+//     let userInputTrait = prompt("Please enter a trait to search by:")    
+//     let userInputVal = prompt("Please enter a trait specification: ")   
+//     let foundPerson = array.filter(function(el){
+//         try {
+//             if(el[userInputTrait].includes(userInputVal)){
+//                 return true;
+//             }
+//         } catch (error){
+//             alert("I did not find that value. Please try again.")
+//             return searchByTraits(people);
+//         }
+//         finally{
+//             if(el[userInputTrait]===parseInt(userInputVal)){
+//                 return true;
+//             }
+//         }
+//     });
+//     return displayPeople(foundPerson);
+// }
 
 function searchByTraits(people){
     let searchByTraitsResult = searchByTraitsFunction(people)
     return searchByTraitsResult;
 }
 
-// search .includes() "eyeColor"
+
+
+function searchByTraitsFunction(array){    
+    alert("Trait search options are: \ngender\ndob\nheight\nweight\neyeColor\noccupation")    
+    let numTraitSearches = prompt("How many traits would you like to search by? (max 5)")
+    let userInputTrait = prompt("Please enter a trait to search by:")    
+    let userInputVal = prompt("Please enter a trait specification: ")   
+    let foundPerson = array.filter(function(el){
+    switch (numTraitSearches) {
+        case 1:        
+                try {
+                    if(el[userInputTrait].includes(userInputVal)){
+                        return true;
+                    }
+                } catch (error){
+                    alert("I did not find that value. Please try again.")
+                    return searchByTraits(people);
+                }
+                finally{
+                    if(el[userInputTrait]===parseInt(userInputVal)){
+                        return true;
+                    }
+                }
+                break;  
+                case 2:
+                    for (let i = 0; i < array.length; i++) {
+                        ;                
+                    }
+                    break;
+                    default:
+                        app(people);
+                        break;
+        }
+    });
+    return displayPeople(foundPerson);
+}

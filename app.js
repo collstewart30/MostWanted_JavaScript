@@ -30,8 +30,9 @@ function app(people) {
             break;
         case "no":
             //! TODO #4: Declare a searchByTraits (multiple traits) function //////////////////////////////////////////
-                //! TODO #4a: Provide option to search for single or multiple //////////////////////////////////////////
+            //! TODO #4a: Provide option to search for single or multiple //////////////////////////////////////////
             searchResults = searchByTraits(people);
+            app();
             break;
         default:
             // Re-initializes the app() if neither case was hit above. This is an instance of recursion.
@@ -70,12 +71,12 @@ function mainMenu(person, people) {
             break;
         case "family":
             //! TODO #2: Declare a findPersonFamily function //////////////////////////////////////////
-            // HINT: Look for a people-collection stringifier utility function to help      spouse, siblings, parents - function for each
+            // HINT: Look for a people-collection stringifier utility function to help      spouse, siblings, parents - function for each   DONE
             let personFamily = findPersonFamily(person[0], people);        
             alert(personFamily);
             break;
         case "descendants":
-            //! TODO #3: Declare a findPersonDescendants function //////////////////////////////////////////
+            //! TODO #3: Declare a findPersonDescendants function //////////////////////////////////////////            DONE
             // HINT: Review recursion lecture + demo for bonus user story
             let personDescendants = findPersonDescendants(person[0], people);
             alert(personDescendants);
@@ -87,10 +88,6 @@ function mainMenu(person, people) {
         case "quit":
             // Stop application execution
             return;
-        // case "test":
-        //     let personParents = findPersonParents(person[0], people);
-        //     alert(personParents);            
-        //     break;
         default:
             // Prompt user again. Another instance of recursion
             return mainMenu(person, people);
@@ -280,9 +277,8 @@ function findPersonDescendants(person, people = []){
             findPersonDescendants(person[i])   // recursive function, person to pass in
         );
     }
-    return displayPeople(results);
+    return displayPeople(results);      // where to label "Descendant"
 }
-
 
 
 
@@ -303,27 +299,27 @@ function findPersonDescendants(person, people = []){
 function searchByTraitsFunction(array){
     let userInputTrait = prompt("Please enter a trait to search by:")    // add a switch case
     let userInputVal = prompt("Please enter a trait specification: ")   // add a swtich case
-    let foundPerson = array.filter(function(element){
+    let foundPerson = array.filter(function(el){
         try {
-            if(element[userInputTrait].includes(userInputVal)){
+            if(el[userInputTrait].includes(userInputVal)){
                 return true;
             }
         } catch (error){
-            alert("Error. Please try again.")
+            alert("I did not find that value. Please try again.")
             return mainMenu(person, people);
         }
         finally{
-            if(element[userInputTrait]===parseInt(userInputVal)){
+            if(el[userInputTrait]===parseInt(userInputVal)){
                 return true;
             }
         }
     });
-    return foundPerson;
+    return displayPeople(foundPerson);
 }
 
 function searchByTraits(people){
     let searchByTraitsResult = searchByTraitsFunction(people)
-
+    return searchByTraitsResult;
 }
 
 // search .includes() "eyeColor"

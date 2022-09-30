@@ -87,10 +87,10 @@ function mainMenu(person, people) {
         case "quit":
             // Stop application execution
             return;
-        case "test":
-            let personParents = findPersonParents(person[0], people);
-            alert(personParents);            
-            break;
+        // case "test":
+        //     let personParents = findPersonParents(person[0], people);
+        //     alert(personParents);            
+        //     break;
         default:
             // Prompt user again. Another instance of recursion
             return mainMenu(person, people);
@@ -126,7 +126,7 @@ function searchByName(people) {
  */
 function displayPeople(people) {
     alert(
-        data
+        people
             .map(function (person) {
                 return `${person.firstName} ${person.lastName}`;
             })
@@ -266,7 +266,6 @@ if (personSiblings != null) {
     }
 }
 return newArray;
-
 }
 
 
@@ -276,40 +275,14 @@ function findPersonDescendants(person, people = []){
     if (results.length === 0) return results;
 
     // recursive case - calling function (might consider using in for-loop)
-    for (let index = 0; index < results.length; index++) {
+    for (let i = 0; i < results.length; i++) {
         results = results.concat(
-            findPersonDescendants(results[i])   // recursive function, person to pass in
-        )  
-        ;        
+            findPersonDescendants(person[i])   // recursive function, person to pass in
+        );
     }
-
-    
-    // let newArray = people.filter(function(el){
-    //     if (person.id == el.id) {
-    //         return false;
-    //     }
-    //     if(person.parents.includes(el.parents[0]) || person.parents.includes(el.parents[1])) {
-    //         return true;
-    //     }       
-        
-    //     let newArray = person.parents;
-    //     array = [person];
-        
-    //     if(newArray.length === 0){
-    //         return array;
-    //     }
-    //     for (let index = 0; index < newArray.length; index++) {
-    //         array = array.concat(
-    //             findPersonDescendants(newArray[i])
-    //             );
-    //         }
-    //     })
-    // return newArray;
-
-    return results;
+    return displayPeople(results);
 }
 
-displayPeople(findPersonDescendants(person,people))
 
 
 

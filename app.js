@@ -79,7 +79,6 @@ function mainMenu(person, people) {
             //! TODO #3: Declare a findPersonDescendants function //////////////////////////////////////////            DONE
             // HINT: Review recursion lecture + demo for bonus user story
             let personDescendants = findPersonDescendants(person[0], people);
-            alert(personDescendants);
             break;
         case "restart":
             // Restart app() from the very beginning
@@ -277,31 +276,31 @@ function findPersonDescendants(person, people = []){
             findPersonDescendants(person[i])   // recursive function, person to pass in
         );
     }
-    return displayPeople(results);      // where to label "Descendant"
+    return displayPeople(results);              // where to label "Descendant"
 }
 
 
-// function searchByTraitsFunction(array){    
-//     alert("Trait search options are: \ngender\ndob\nheight\nweight\neyeColor\noccupation")
-//     let userInputTrait = prompt("Please enter a trait to search by:")    
-//     let userInputVal = prompt("Please enter a trait specification: ")   
-//     let foundPerson = array.filter(function(el){
-//         try {
-//             if(el[userInputTrait].includes(userInputVal)){
-//                 return true;
-//             }
-//         } catch (error){
-//             alert("I did not find that value. Please try again.")
-//             return searchByTraits(people);
-//         }
-//         finally{
-//             if(el[userInputTrait]===parseInt(userInputVal)){
-//                 return true;
-//             }
-//         }
-//     });
-//     return displayPeople(foundPerson);
-// }
+function searchByTraitsFunction(array){    
+    alert("Trait search options are: \ngender\ndob\nheight\nweight\neyeColor\noccupation")
+    let userInputTrait = prompt("Please enter a trait to search by:")    
+    let userInputVal = prompt("Please enter a trait specification: ")   
+    let foundPerson = array.filter(function(el){
+        try {
+            if(el[userInputTrait].includes(userInputVal)){
+                return true;
+            }
+        } catch (error){
+            alert("I did not find that value. Please try again.")
+            return searchByTraits(people);
+        }
+        finally{
+            if(el[userInputTrait]===parseInt(userInputVal)){
+                return true;
+            }
+        }
+    });
+    return displayPeople(foundPerson);
+}
 
 function searchByTraits(people){
     let searchByTraitsResult = searchByTraitsFunction(people)
@@ -309,38 +308,38 @@ function searchByTraits(people){
 }
 
 
-
-function searchByTraitsFunction(array){    
-    alert("Trait search options are: \ngender\ndob\nheight\nweight\neyeColor\noccupation")    
-    let numTraitSearches = prompt("How many traits would you like to search by? (max 5)")
-    let userInputTrait = prompt("Please enter a trait to search by:")    
-    let userInputVal = prompt("Please enter a trait specification: ")   
-    let foundPerson = array.filter(function(el){
-    switch (numTraitSearches) {
-        case 1:        
-                try {
-                    if(el[userInputTrait].includes(userInputVal)){
-                        return true;
-                    }
-                } catch (error){
-                    alert("I did not find that value. Please try again.")
-                    return searchByTraits(people);
-                }
-                finally{
-                    if(el[userInputTrait]===parseInt(userInputVal)){
-                        return true;
-                    }
-                }
-                break;  
-                case 2:
-                    for (let i = 0; i < array.length; i++) {
-                        ;                
-                    }
-                    break;
-                    default:
-                        app(people);
-                        break;
-        }
-    });
-    return displayPeople(foundPerson);
-}
+// starting logic to search by multiple traits
+// function searchByTraitsFunction(array){    
+//     alert("Trait search options are: \ngender\ndob\nheight\nweight\neyeColor\noccupation")    
+//     let numTraitSearches = prompt("How many traits would you like to search by? (max 5)")
+//     let userInputTrait = prompt("Please enter a trait to search by:")    
+//     let userInputVal = prompt("Please enter a trait specification: ")   
+//     let foundPerson = array.filter(function(el){
+//     switch (numTraitSearches) {
+//         case 1:        
+//                 try {
+//                     if(el[userInputTrait].includes(userInputVal)){
+//                         return true;
+//                     }
+//                 } catch (error){
+//                     alert("I did not find that value. Please try again.")
+//                     return searchByTraits(people);
+//                 }
+//                 finally{
+//                     if(el[userInputTrait]===parseInt(userInputVal)){
+//                         return true;
+//                     }
+//                 }
+//                 break;  
+//                 case 2:
+//                     for (let i = 0; i < array.length; i++) {
+//                         ;                
+//                     }
+//                     break;
+//                     default:
+//                         app(people);
+//                         break;
+//         }
+//     });
+//     return displayPeople(foundPerson);
+// }
